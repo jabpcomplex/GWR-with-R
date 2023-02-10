@@ -35,7 +35,7 @@ Los mínimos cuadrados ponderados proporcionarán una comprensión básica de c�
 
 ![image](https://user-images.githubusercontent.com/86539158/218215268-de7cafeb-fa66-42b9-a855-0b74fa3b83f7.png)
 
-donde 𝜷̂ es una estimación de 𝜷gorro y 𝑾(𝑢_𝒊, 𝑣_𝒊) es una matriz de 𝑛 por 𝑛 cuyos elementos fuera de la diagonal son cero y cuyos elementos diagonales indican la ponderación geográfica de los datos observados para el punto 𝒊.
+donde 𝜷̂gorro_i es una estimación de 𝜷 y 𝑾(𝑢_𝒊, 𝑣_𝒊) es una matriz de 𝑛 por 𝑛 cuyos elementos fuera de la diagonal son cero y cuyos elementos diagonales indican la ponderación geográfica de los datos observados para el punto 𝒊.
 
 ------------------------------------------------------------------------------------------------------------
 Primero es necesario definir las unidades de análisis, que en este caso serán las Áreas Geoestadísticas Básicas (AGEB´s) de la ciudad de México (CDMX).
