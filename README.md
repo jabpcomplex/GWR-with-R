@@ -16,7 +16,10 @@ GWR se utiliza para capturar la variación a través de la calibración de un mo
 ## Método
 
 La regresión lineal simple se usa con frecuencia como herramienta de modelado en el análisis geográfico en el que la variable dependiente se modela como una función lineal de un conjunto de variables independientes conocidas como variables predictoras [3]. Un modelo de regresión global se puede escribir como:
+
 𝑦_𝑖= β_0+∑_(𝑘=1)^𝑛▒〖β_𝑘 𝑥_𝑖𝑘 〗+ε_𝑖               (1)
+![image](https://user-images.githubusercontent.com/86539158/218214641-e46f7bbf-00f6-469c-acc1-99b4824e299e.png)
+
 
 donde  𝑦_𝑖 es la i-ésima observación de la variable dependiente, 𝑥_𝑖𝑘 es la i-ésima observación de la k-ésima variable de respuesta, ε_𝑖 es el i-ésimo  término de error o perturbación (independientes normalmente distribuidos con media cero ) y los predictores β_𝑘 debe determinarse a partir de una muestra de 𝑛 observaciones.
 
@@ -37,6 +40,4 @@ Referencias
 [5] Li, S., Zhou, C., Wang, S., Gao, S., & Liu, Z. (2019). Spatial heterogeneity in the determinants of urban form: an analysis of Chinese cities with a GWR approach. Sustainability, 11(2), 479.
 
 [6] Bivand, R. (2017). Geographically weighted regression. CRAN Task View: Analysis of Spatial Data.
-![image](https://user-images.githubusercontent.com/86539158/218214502-dac79d39-d161-4d55-bd33-ebb9ec410e2b.png)
-
 
