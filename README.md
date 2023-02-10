@@ -49,9 +49,11 @@ análisis.
 
 En el modelo de MCO ponderados o en el análisis de Moran la ponderación esta determinada por la distancia del punto i y su j-ésimo vecino. Y su matriz de ponderación es:
 
-![image](https://user-images.githubusercontent.com/86539158/218216375-a491aee0-50d6-4b0a-b563-25a687ad9903.png)
+![image](https://user-images.githubusercontent.com/86539158/218219116-0df2e5d6-310e-43cf-a5be-684b98569d36.png)
 
 donde 𝑑_𝑖𝑗 es la distancia ente i y j.
+
+
 
 La ec. (3)  sufrirá problemas de discontinuidad a medida que 𝑖 varía alrededor del área de estudio. Para solucionar este problema GWR asocia una función continua como una forma de combatir el problema de la discontinuidad de los pesos.
 
