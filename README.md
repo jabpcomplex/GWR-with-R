@@ -17,16 +17,69 @@ GWR se utiliza para capturar la variación a través de la calibración de un mo
 
 La regresión lineal simple se usa con frecuencia como herramienta de modelado en el análisis geográfico en el que la variable dependiente se modela como una función lineal de un conjunto de variables independientes conocidas como variables predictoras [3]. Un modelo de regresión global se puede escribir como:
 
-𝑦_𝑖= β_0+∑_(𝑘=1)^𝑛▒〖β_𝑘 𝑥_𝑖𝑘 〗+ε_𝑖               (1)
 ![image](https://user-images.githubusercontent.com/86539158/218214641-e46f7bbf-00f6-469c-acc1-99b4824e299e.png)
-
 
 donde  𝑦_𝑖 es la i-ésima observación de la variable dependiente, 𝑥_𝑖𝑘 es la i-ésima observación de la k-ésima variable de respuesta, ε_𝑖 es el i-ésimo  término de error o perturbación (independientes normalmente distribuidos con media cero ) y los predictores β_𝑘 debe determinarse a partir de una muestra de 𝑛 observaciones.
 
 
-------------------------------------------------------------------------------------------------------------
- 
+GWR amplía el marco de regresión de la ec. (1) al permitir estimar el parámetro local en lugar del parámetro global, de modo que el modelo se reescribe como:
 
+![image](https://user-images.githubusercontent.com/86539158/218214792-65fa0699-ebca-448b-b4e5-5893c497dca9.png)
+
+
+donde (𝑢_𝑖,𝑣_𝑖) son las coordenadas del punto en el espacio y 𝛽_𝑘 (𝑢_𝑖,𝑣_𝑖) es la realización de la función continua 𝛽_𝑘 (𝑢,𝑣) en el punto 𝑖. 
+La calibración de ec. (2) supone que los datos observados cerca de la ubicación 𝑖 podrían tener más influencia en la estimación de 𝛽_𝑘 (𝑢_𝑖,𝑣_𝑖).
+
+Los mínimos cuadrados ponderados proporcionarán una comprensión básica de cómo funciona el GWR. En el método de mínimos cuadrados ponderados, se aplica un factor de ponderación a cada diferencia cuadrática antes de minimizar, de modo que la inexactitud de algunas predicciones conllevará una mayor penalización que otras. En GWR, una observación se pondera cerca de la ubicación 𝑖, de modo que la ponderación de una observación varía con 𝑖. Los datos obtenidos de observaciones cercanas a 𝑖 tienen más peso que los datos obtenidos de observaciones lejanas, es decir:
+
+
+![image](https://user-images.githubusercontent.com/86539158/218215268-de7cafeb-fa66-42b9-a855-0b74fa3b83f7.png)
+
+donde 𝜷̂ es una estimación de 𝜷 y 𝑾(𝑢_𝒊, 𝑣_𝒊) es una matriz de 𝑛 por 𝑛 cuyos elementos fuera de la diagonal son cero y cuyos elementos diagonales indican la ponderación geográfica de los datos observados para el punto 𝒊.
+
+------------------------------------------------------------------------------------------------------------
+Primero es necesario definir las unidades de análisis, que en este caso serán las Áreas Geoestadísticas Básicas (AGEB´s) de la ciudad de México (CDMX).
+
+ 
+ ![image](https://user-images.githubusercontent.com/86539158/218216182-bc89475e-f3bc-4d5b-a7ba-d9bb62e533c9.png)
+
+
+Después es necesario definir un tipo de ponderación entre los vecinos de las unidades de 
+análisis. 
+
+En el modelo de MCO ponderados o en el análisis de Moran la ponderación esta determinada por la distancia del punto i y su j-ésimo vecino. Y su matriz de ponderación es:
+
+![image](https://user-images.githubusercontent.com/86539158/218216375-a491aee0-50d6-4b0a-b563-25a687ad9903.png)
+
+donde 𝑑_𝑖𝑗 es la distancia ente i y j.
+
+La ec. (3)  sufrirá problemas de discontinuidad a medida que 𝑖 varía alrededor del área de estudio. Para solucionar este problema GWR asocia una función continua como una forma de combatir el problema de la discontinuidad de los pesos.
+
+
+![image](https://user-images.githubusercontent.com/86539158/218216575-9595291f-5ddd-4868-92c3-42aacbaf5f5a.png)
+
+donde 𝑏 se denomina ancho de banda (bandwidth).
+
+Otra función de ponderación alternativa  es:
+
+![image](https://user-images.githubusercontent.com/86539158/218216740-549f2f12-e19c-4844-aa11-3f1e247c8930.png)
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+------------------------------------------------------------------------------------------------------------
 Referencias
 
 [1] Brunsdon, C., Fotheringham, A. S., & Charlton, M. E. (1996). Geographically weighted regression: a method for exploring spatial nonstationarity. Geographical analysis, 28(4), 281-298.
