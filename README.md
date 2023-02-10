@@ -35,7 +35,7 @@ Los mínimos cuadrados ponderados proporcionarán una comprensión básica de c�
 
 ![image](https://user-images.githubusercontent.com/86539158/218215268-de7cafeb-fa66-42b9-a855-0b74fa3b83f7.png)
 
-donde 𝜷̂ es una estimación de 𝜷 y 𝑾(𝑢_𝒊, 𝑣_𝒊) es una matriz de 𝑛 por 𝑛 cuyos elementos fuera de la diagonal son cero y cuyos elementos diagonales indican la ponderación geográfica de los datos observados para el punto 𝒊.
+donde 𝜷̂ es una estimación de 𝜷gorro y 𝑾(𝑢_𝒊, 𝑣_𝒊) es una matriz de 𝑛 por 𝑛 cuyos elementos fuera de la diagonal son cero y cuyos elementos diagonales indican la ponderación geográfica de los datos observados para el punto 𝒊.
 
 ------------------------------------------------------------------------------------------------------------
 Primero es necesario definir las unidades de análisis, que en este caso serán las Áreas Geoestadísticas Básicas (AGEB´s) de la ciudad de México (CDMX).
@@ -64,13 +64,77 @@ Otra función de ponderación alternativa  es:
 
 ![image](https://user-images.githubusercontent.com/86539158/218216740-549f2f12-e19c-4844-aa11-3f1e247c8930.png)
 
+𝐾(𝑑_𝑖𝑗) se conoce como  función Kernel vecina más cercana bicuadrada. 
+Existen diferentes du funciones de ponderación que se pueden utilizar dependiendo de la forma en la que se distribuyen los datos en el espacio geográfico. La función en ec.(4 ) se conoce como  función Kernel de Gauss. 
+
+En otras palabras si la distancia entre el sitio 𝑖 y el sitio 𝑗 es menor que el ancho de banda 𝑏, se asocia un numero de ponderación y se contabiliza en el modelo dado por la ec.(2)
+
+Funciones de ponderación:
+
+![image](https://user-images.githubusercontent.com/86539158/218217928-6c23019e-109e-409e-910c-dbf0721255e1.png)
 
 
+Se han propuesto varios criterios para seleccionar un ancho de banda optimo.  Por ejemplo:
+
+El enfoque de validación cruzada (VC)
+El criterio de información de Akaike (AIC
+Es importante mencionar que para seleccionar las variables predictoras que introduciremos como parámetros en las llamadas de las funciones, se investigó la correlación entre algunas de las observaciones de la base y utilizamos las que mostraron mayor correlación.
+
+FUNCIONES:
+
+La función gwr.sel(parámetros) de la librería spgwr en R [6]  encuentra un ancho de banda  mediante la optimización de una función seleccionada (CV, AIC, etc).
+
+
+La función gwr(parámetros) implementa el enfoque básico de GWR para explorar la no estacionariedad espacial para un ancho de banda dado y un esquema de ponderación elegido.
+ 
+ 
+De la base de datos DAI_2022_AGEBS   usamos las siguientes variables como predictores:
+1.homicidios    5. danos_casa
+2.narcomenud    6. danos_nego
+3. resion_c    7. agresion_n 
+4. Accidente     8. agresion_p
+
+Para predecir la variable disturbi_7(Disturbio-Fiesta), es decir, la cantidad de disturbios en fiestas asociada a cada AGEB. 
+Usamos la validación cruzada (cv) para encontrar el ancho de banda óptimo (GWRbandwidth) que usará el kernel que genera el mejor modelo
+
+GWRbandwidth <- gwr.sel(disturbi_7 ~ homicidios + narcomenud+ agresion_c + agresion_n + danos_casa + danos_nego + accidente + agresion_p, data = shpf, method = "cv",adapt = T,verbose = TRUE)
+
+La función gwr implementa el enfoque básico de GWR para explorar la no estacionariedad espacial para un ancho de banda dado y un esquema de ponderación elegido (función Kernel).
+
+gwr(formula = disturbi_7 ~ homicidios + narcomenud + agresion_c + agresion_n + danos_casa + danos_nego + accidente + agresion_p, data = shpf, gweight = gwr.Gauss, adapt = GWRbandwidth, hatmatrix = TRUE, se.fit = TRUE)
+
+
+El llamado de gwr()  aplica la función de ponderación a su vez a cada una de las observaciones, o puntos de ajuste si se dan, calculando una regresión ponderada para cada punto. Los resultados pueden explorarse para ver si los valores de los coeficientes varían en el espacio. 
+
+En las imágen se muestra un panorama general de los resultados. 
+
+
+La figura muestra la distribución espacial de la variable dependiente disturbi_7(Disturbio-Fiestas) en la CDMX a nivel de AGEB’s para el año 2022.
+
+![image](https://user-images.githubusercontent.com/86539158/218218395-477d6b82-4cc2-4601-bb61-d31c25f9c7f8.png)
+
+La siguiente figura muestra la distribución espacial de los coeficientes de regresión para los primeros 4 factores de influencia:
+
+(a) homidicios; 
+(b) narcomenud; 
+(c) agresion_c  (Agresión-Casa Habitación); 
+(d) agresion_n (Agresión-negocio);
+
+ derivados de los modelos GWR, siendo disturb_7 la variable dependiente.
+ 
+ ![image](https://user-images.githubusercontent.com/86539158/218218646-7f7bd423-4df1-4ab7-87b9-9baaef53ede8.png)
+
+ La figura muestra la variación geográfica del R^2 local del modelo representado por la ec.(2), que oscila entre 0.2 y 0.6
+
+Dado que el R^2 es muy bajo para la mayoría de las unidades de análisis no tendremos una buena predicción de la variable de respuesta disturbi_7
+
+Por lo tanto las conclusiones que pudramos obtener de los coeficientes de predicción serán equivocadas.
+
+![image](https://user-images.githubusercontent.com/86539158/218218830-cad7d9e7-0d2e-4b7f-8d95-d48e18c880f9.png)
 
  
- 
- 
- 
+ Para probar la significancia estadística y la dirección de los coeficientes de regresión para las variables independientes, se podrían realizar pseudo pruebas-t como lo hicieron en [5]. De esta manera obtener las correlaciones significativas entre los ocho factores influyentes  derivado del modelo GWR.
+
  
  
  
