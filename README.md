@@ -19,7 +19,7 @@ La regresión lineal simple se usa con frecuencia como herramienta de modelado e
 
 ![image|30](https://user-images.githubusercontent.com/86539158/218214641-e46f7bbf-00f6-469c-acc1-99b4824e299e.png)
 
-donde  𝑦_𝑖 es la i-ésima observación de la variable dependiente, 𝑥_𝑖𝑘 es la i-ésima observación de la k-ésima variable de respuesta, ε_𝑖 es el i-ésimo  término de error o perturbación (independientes normalmente distribuidos con media cero ) y los predictores β_𝑘 debe determinarse a partir de una muestra de 𝑛 observaciones.
+donde  𝑦_𝑖 es la i-ésima observación de la variable dependiente, $x_{ij}$ es la i-ésima observación de la k-ésima variable de respuesta, $\varepsilon_i$ es el i-ésimo  término de error o perturbación (independientes normalmente distribuidos con media cero ) y los predictores β_𝑘 debe determinarse a partir de una muestra de 𝑛 observaciones.
 
 
 GWR amplía el marco de regresión de la ec. (1) al permitir estimar el parámetro local en lugar del parámetro global, de modo que el modelo se reescribe como:
@@ -27,15 +27,15 @@ GWR amplía el marco de regresión de la ec. (1) al permitir estimar el parámet
 ![image|30](https://user-images.githubusercontent.com/86539158/218214792-65fa0699-ebca-448b-b4e5-5893c497dca9.png)
 
 
-donde (𝑢_𝑖,𝑣_𝑖) son las coordenadas del punto en el espacio y \beta_k (u_i,v_i)$  es la realización de la función continua $\beta_k (u,v)$ en el punto 𝑖. 
-La calibración de ec. (2) supone que los datos observados cerca de la ubicación 𝑖 podrían tener más influencia en la estimación de 𝛽_𝑘 (𝑢_𝑖,𝑣_𝑖).
+donde $(u_i,v_i)$ son las coordenadas del punto en el espacio y $\beta_k(u_i,v_i)$  es la realización de la función continua $\beta_k(u,v)$ en el punto $i$. 
+La calibración de ec. (2) supone que los datos observados cerca de la ubicación 𝑖 podrían tener más influencia en la estimación de $\beta_k(u_i,v_i)$.
 
 Los mínimos cuadrados ponderados proporcionarán una comprensión básica de cómo funciona el GWR. En el método de mínimos cuadrados ponderados, se aplica un factor de ponderación a cada diferencia cuadrática antes de minimizar, de modo que la inexactitud de algunas predicciones conllevará una mayor penalización que otras. En GWR, una observación se pondera cerca de la ubicación 𝑖, de modo que la ponderación de una observación varía con 𝑖. Los datos obtenidos de observaciones cercanas a 𝑖 tienen más peso que los datos obtenidos de observaciones lejanas, es decir:
 
 
 ![image|30](https://user-images.githubusercontent.com/86539158/218215268-de7cafeb-fa66-42b9-a855-0b74fa3b83f7.png)
 
-donde $\hat{\beta}$ es una estimación de $\beta$ y $W(u_i, v_i)$ es una matriz de $nxn$ cuyos elementos fuera de la diagonal son cero y cuyos elementos diagonales indican la ponderación geográfica de los datos observados para el punto 𝒊.
+donde $\hat{\beta}$ es una estimación de $\beta$ y $W(u_i, v_i)$ es una matriz de $nxn$ cuyos elementos fuera de la diagonal son cero y cuyos elementos diagonales indican la ponderación geográfica de los datos observados para el punto $i$.
 
 ------------------------------------------------------------------------------------------------------------
 Primero es necesario definir las unidades de análisis, que en este caso serán las Áreas Geoestadísticas Básicas (AGEB´s) de la ciudad de México (CDMX).
@@ -51,7 +51,7 @@ En el modelo de MCO ponderados o en el análisis de Moran la ponderación esta d
 
 ![image|30](https://user-images.githubusercontent.com/86539158/218219116-0df2e5d6-310e-43cf-a5be-684b98569d36.png)
 
-donde 𝑑_𝑖𝑗 es la distancia ente i y j.
+donde $d_{ij}$ es la distancia ente i y j.
 
 
 
