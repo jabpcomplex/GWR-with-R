@@ -17,14 +17,14 @@ GWR se utiliza para capturar la variación a través de la calibración de un mo
 
 La regresión lineal simple se usa con frecuencia como herramienta de modelado en el análisis geográfico en el que la variable dependiente se modela como una función lineal de un conjunto de variables independientes conocidas como variables predictoras [3]. Un modelo de regresión global se puede escribir como:
 
-![image](https://user-images.githubusercontent.com/86539158/218214641-e46f7bbf-00f6-469c-acc1-99b4824e299e.png)
+![image|30](https://user-images.githubusercontent.com/86539158/218214641-e46f7bbf-00f6-469c-acc1-99b4824e299e.png)
 
 donde  𝑦_𝑖 es la i-ésima observación de la variable dependiente, 𝑥_𝑖𝑘 es la i-ésima observación de la k-ésima variable de respuesta, ε_𝑖 es el i-ésimo  término de error o perturbación (independientes normalmente distribuidos con media cero ) y los predictores β_𝑘 debe determinarse a partir de una muestra de 𝑛 observaciones.
 
 
 GWR amplía el marco de regresión de la ec. (1) al permitir estimar el parámetro local en lugar del parámetro global, de modo que el modelo se reescribe como:
 
-![image|100](https://user-images.githubusercontent.com/86539158/218214792-65fa0699-ebca-448b-b4e5-5893c497dca9.png)
+![image|30](https://user-images.githubusercontent.com/86539158/218214792-65fa0699-ebca-448b-b4e5-5893c497dca9.png)
 
 
 donde (𝑢_𝑖,𝑣_𝑖) son las coordenadas del punto en el espacio y 𝛽_𝑘 (𝑢_𝑖,𝑣_𝑖) es la realización de la función continua 𝛽_𝑘 (𝑢,𝑣) en el punto 𝑖. 
@@ -33,7 +33,7 @@ La calibración de ec. (2) supone que los datos observados cerca de la ubicació
 Los mínimos cuadrados ponderados proporcionarán una comprensión básica de cómo funciona el GWR. En el método de mínimos cuadrados ponderados, se aplica un factor de ponderación a cada diferencia cuadrática antes de minimizar, de modo que la inexactitud de algunas predicciones conllevará una mayor penalización que otras. En GWR, una observación se pondera cerca de la ubicación 𝑖, de modo que la ponderación de una observación varía con 𝑖. Los datos obtenidos de observaciones cercanas a 𝑖 tienen más peso que los datos obtenidos de observaciones lejanas, es decir:
 
 
-![image|50](https://user-images.githubusercontent.com/86539158/218215268-de7cafeb-fa66-42b9-a855-0b74fa3b83f7.png)
+![image|30](https://user-images.githubusercontent.com/86539158/218215268-de7cafeb-fa66-42b9-a855-0b74fa3b83f7.png)
 
 donde 𝜷̂gorro_i es una estimación de 𝜷 y 𝑾(𝑢_𝒊, 𝑣_𝒊) es una matriz de 𝑛 por 𝑛 cuyos elementos fuera de la diagonal son cero y cuyos elementos diagonales indican la ponderación geográfica de los datos observados para el punto 𝒊.
 
@@ -49,7 +49,7 @@ análisis.
 
 En el modelo de MCO ponderados o en el análisis de Moran la ponderación esta determinada por la distancia del punto i y su j-ésimo vecino. Y su matriz de ponderación es:
 
-![image](https://user-images.githubusercontent.com/86539158/218219116-0df2e5d6-310e-43cf-a5be-684b98569d36.png)
+![image|30](https://user-images.githubusercontent.com/86539158/218219116-0df2e5d6-310e-43cf-a5be-684b98569d36.png)
 
 donde 𝑑_𝑖𝑗 es la distancia ente i y j.
 
@@ -58,13 +58,13 @@ donde 𝑑_𝑖𝑗 es la distancia ente i y j.
 La ec. (3)  sufrirá problemas de discontinuidad a medida que 𝑖 varía alrededor del área de estudio. Para solucionar este problema GWR asocia una función continua como una forma de combatir el problema de la discontinuidad de los pesos.
 
 
-![image](https://user-images.githubusercontent.com/86539158/218216575-9595291f-5ddd-4868-92c3-42aacbaf5f5a.png)
+![image|30](https://user-images.githubusercontent.com/86539158/218216575-9595291f-5ddd-4868-92c3-42aacbaf5f5a.png)
 
 donde 𝑏 se denomina ancho de banda (bandwidth).
 
 Otra función de ponderación alternativa  es:
 
-![image](https://user-images.githubusercontent.com/86539158/218216740-549f2f12-e19c-4844-aa11-3f1e247c8930.png)
+![image|30](https://user-images.githubusercontent.com/86539158/218216740-549f2f12-e19c-4844-aa11-3f1e247c8930.png)
 
 𝐾(𝑑_𝑖𝑗) se conoce como  función Kernel vecina más cercana bicuadrada. 
 Existen diferentes du funciones de ponderación que se pueden utilizar dependiendo de la forma en la que se distribuyen los datos en el espacio geográfico. La función en ec.(4 ) se conoce como  función Kernel de Gauss. 
@@ -73,7 +73,7 @@ En otras palabras si la distancia entre el sitio 𝑖 y el sitio 𝑗 es menor q
 
 Funciones de ponderación:
 
-![image](https://user-images.githubusercontent.com/86539158/218217928-6c23019e-109e-409e-910c-dbf0721255e1.png)
+![image|30](https://user-images.githubusercontent.com/86539158/218217928-6c23019e-109e-409e-910c-dbf0721255e1.png)
 
 
 Se han propuesto varios criterios para seleccionar un ancho de banda optimo.  Por ejemplo:
@@ -113,7 +113,7 @@ En las imágen se muestra un panorama general de los resultados.
 
 La figura muestra la distribución espacial de la variable dependiente disturbi_7(Disturbio-Fiestas) en la CDMX a nivel de AGEB’s para el año 2022.
 
-![image](https://user-images.githubusercontent.com/86539158/218218395-477d6b82-4cc2-4601-bb61-d31c25f9c7f8.png)
+![image|30](https://user-images.githubusercontent.com/86539158/218218395-477d6b82-4cc2-4601-bb61-d31c25f9c7f8.png)
 
 La siguiente figura muestra la distribución espacial de los coeficientes de regresión para los primeros 4 factores de influencia:
 
@@ -124,7 +124,7 @@ La siguiente figura muestra la distribución espacial de los coeficientes de reg
 
  derivados de los modelos GWR, siendo disturb_7 la variable dependiente.
  
- ![image](https://user-images.githubusercontent.com/86539158/218218646-7f7bd423-4df1-4ab7-87b9-9baaef53ede8.png)
+ ![image|30](https://user-images.githubusercontent.com/86539158/218218646-7f7bd423-4df1-4ab7-87b9-9baaef53ede8.png)
 
  La figura muestra la variación geográfica del R^2 local del modelo representado por la ec.(2), que oscila entre 0.2 y 0.6
 
@@ -132,7 +132,7 @@ Dado que el R^2 es muy bajo para la mayoría de las unidades de análisis no ten
 
 Por lo tanto las conclusiones que pudramos obtener de los coeficientes de predicción serán equivocadas.
 
-![image](https://user-images.githubusercontent.com/86539158/218218830-cad7d9e7-0d2e-4b7f-8d95-d48e18c880f9.png)
+![image|30](https://user-images.githubusercontent.com/86539158/218218830-cad7d9e7-0d2e-4b7f-8d95-d48e18c880f9.png)
 
  
  Para probar la significancia estadística y la dirección de los coeficientes de regresión para las variables independientes, se podrían realizar pseudo pruebas-t como lo hicieron en [5]. De esta manera obtener las correlaciones significativas entre los ocho factores influyentes  derivado del modelo GWR.
