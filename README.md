@@ -24,7 +24,7 @@ donde  𝑦_𝑖 es la i-ésima observación de la variable dependiente, 𝑥_�
 
 GWR amplía el marco de regresión de la ec. (1) al permitir estimar el parámetro local en lugar del parámetro global, de modo que el modelo se reescribe como:
 
-![image](https://user-images.githubusercontent.com/86539158/218214792-65fa0699-ebca-448b-b4e5-5893c497dca9.png)
+![image|100](https://user-images.githubusercontent.com/86539158/218214792-65fa0699-ebca-448b-b4e5-5893c497dca9.png)
 
 
 donde (𝑢_𝑖,𝑣_𝑖) son las coordenadas del punto en el espacio y 𝛽_𝑘 (𝑢_𝑖,𝑣_𝑖) es la realización de la función continua 𝛽_𝑘 (𝑢,𝑣) en el punto 𝑖. 
@@ -33,7 +33,7 @@ La calibración de ec. (2) supone que los datos observados cerca de la ubicació
 Los mínimos cuadrados ponderados proporcionarán una comprensión básica de cómo funciona el GWR. En el método de mínimos cuadrados ponderados, se aplica un factor de ponderación a cada diferencia cuadrática antes de minimizar, de modo que la inexactitud de algunas predicciones conllevará una mayor penalización que otras. En GWR, una observación se pondera cerca de la ubicación 𝑖, de modo que la ponderación de una observación varía con 𝑖. Los datos obtenidos de observaciones cercanas a 𝑖 tienen más peso que los datos obtenidos de observaciones lejanas, es decir:
 
 
-![image](https://user-images.githubusercontent.com/86539158/218215268-de7cafeb-fa66-42b9-a855-0b74fa3b83f7.png)
+![image|50](https://user-images.githubusercontent.com/86539158/218215268-de7cafeb-fa66-42b9-a855-0b74fa3b83f7.png)
 
 donde 𝜷̂gorro_i es una estimación de 𝜷 y 𝑾(𝑢_𝒊, 𝑣_𝒊) es una matriz de 𝑛 por 𝑛 cuyos elementos fuera de la diagonal son cero y cuyos elementos diagonales indican la ponderación geográfica de los datos observados para el punto 𝒊.
 
@@ -41,7 +41,7 @@ donde 𝜷̂gorro_i es una estimación de 𝜷 y 𝑾(𝑢_𝒊, 𝑣_𝒊) es u
 Primero es necesario definir las unidades de análisis, que en este caso serán las Áreas Geoestadísticas Básicas (AGEB´s) de la ciudad de México (CDMX).
 
  
- ![image](https://user-images.githubusercontent.com/86539158/218216182-bc89475e-f3bc-4d5b-a7ba-d9bb62e533c9.png)
+ ![image|30](https://user-images.githubusercontent.com/86539158/218216182-bc89475e-f3bc-4d5b-a7ba-d9bb62e533c9.png)
 
 
 Después es necesario definir un tipo de ponderación entre los vecinos de las unidades de 
