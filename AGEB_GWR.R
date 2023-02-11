@@ -1,6 +1,5 @@
 rm(list = ls())
-
-knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
 library(tidyverse)  # Modern data science workflow
 library(sf)
 library(sp,terra)
@@ -11,10 +10,8 @@ library(tmaptools)
 library(spgwr)  # GWR
 library(gridExtra)
 library(grid)
-# Change the presentation of decimal numbers to 4 and avoid scientific notation
-#options(prompt="jabp@complex > ", digits=4, scipen=999)
 
-setwd("C:/Users/jbautistap/Documents/R/C5/Regresiones/Regresi?n ponderada geogr?ficamente (GWR)/AGEB_BAR_GWR")
+setwd("C:/Users/jabpcomplex/Documents/tu-ruta)/AGEB_BAR_GWR")
 
 #dir.create("plots")
 dir()
@@ -199,15 +196,12 @@ ggpairs(shpf@data,columns=c(8,9,46,47,110,112,21,168,49),lower=list(continuous=p
 
 
 
-#https://rpubs.com/quarcs-lab/tutorial-gwr1
-
-
 ###############################################################################################
 #                             MODELO UNO 1
 # La funci?n gwr.sel encuentra un ancho de banda  mediante la optimizaci?n de una funci?n seleccionada (CV, AIC, etc).
 # Para la validaci?n cruzada, esto punt?a el error de predicci?n cuadr?tico medio de la ra?z para las GWR, eligiendo el ancho de banda que minimiza esta cantidad.
 ################################################################################################
-                     t <- proc.time()   # Inicia el cron?metro;
+                     t <- proc.time()   # Inicia el cron?metro para conocer el tiempo de ejecucion al ejecutar la funcion
 ###############################################################################################
 #usa la validaci?n cruzada para encontrar el ancho de banda ?ptimo que usar? el kernel que genera el mejor modelo
 GWRbandwidth <- gwr.sel(disturbi_7 ~ homicidios + narcomenud+ agresion_c + agresion_n+danos_casa+danos_nego+accidente+agresion_p, data = shpf, method = "cv",adapt = T,verbose = TRUE)
@@ -392,100 +386,5 @@ print(mapp2, vp=viewport(layout.pos.col = 2, layout.pos.row =1))
 print(mapp3, vp=viewport(layout.pos.col = 1, layout.pos.row =2))
 print(mapp4, vp=viewport(layout.pos.col = 2, layout.pos.row =2))
 
-                                                            #
-#                                                            #
-
-#
-
-#                                                            #
-
-#                                                            #
 
 
-
-
-
-
-#                                                            #
-#                                                            #
-
-
-
-#                                                            #
-
-#                                                            #
-#                                                            #
-
-
-
-
-
-#                                                            #
-#                                                            #
-
-#################################################################################################
-# MODELO DOS 2: Ancho de banda del kernel Usar un n?cleo adaptativo
-t <- proc.time()   # Inicia el cron?metro;
-###############################################################################################
-GWRbandwidth2 <- gwr.sel(disturbi_7 ~ homicidios + narcomenud+ agresion_c + agresion_n+danos_casa+danos_prop+danos_nego+accidente+agresion_p, data = shpf, method = "cv",adapt = T)
-#La funci?n gwr implementa el enfoque b?sico de GWR para explorar la no estacionariedad espacial para un ancho de banda global dado y un esquema de ponderaci?n elegido.
-gwr.model2 <- gwr(disturbi_7 ~ homicidios + narcomenud+ agresion_c + agresion_n+danos_casa+danos_prop+danos_nego+accidente+agresion_p, data = shpf,
-                 adapt=GWRbandwidth2,hatmatrix=TRUE,gweight = gwr.Gauss)
-################################################################################################
-proc.time()-t  
-
-
-summary(gwr.model2)
-#Print results
-gwr.model2$adapt
-#ancho de banda usado
-gwr.model2$bandwidth
-
-#CREAR dataframe con los resultados
-results_model2 <-as.data.frame(gwr.model2$SDF)
-names(results_model2)
-
-
-
-
-                ####################################################
-                ####       Creacion y Resultados del mapa 
-                ####################################################
-
-#Vincule los resultados al pol?gono shpf_data
-gwr.map2 <- cbind(shpf, as.matrix(results_model2))
-class(gwr.map2)
-#convertimos el foreign object a sf
-shpf_gwr.map2 <- st_as_sf(gwr.map2)
-#Los nombres de las variables seguidos del nombre de nuestro marco de datos "shpf" son los coeficientes del modelo.
-
-qtm(gwr.map2, fill = "localR2")
-
-qtm(gwr.map, fill = "pred",fill.title = "Cantidad",fill.style="fixed",fill.breaks=c(0,10,15,20,25,30),style = "classic",
-    fill.palette="YlOrRd",title="Disturbios en fiestas",title.position = c("center", "top"))#version1
-#fill ya sea un color para rellenar los pol?gonos, o el nombre de la variable de datos en shp para dibujar una corlorpleta. 
-#Solo aplicable cuando shp contiene pol?gonos.
-
-#distribucion espacial de accidentes
-map1 <- tm_shape(shpf_gwr.map2) + tm_fill("accidente", n = 9, style = "quantile") + tm_borders() +
-  tm_layout(title="Distribucion espacial de accidentes", frame = TRUE,legend.text.size = 0.9,  legend.title.size = 0.9) ; map1
-
-#coeficientes asociados al predictor accidentes
-map2 <- tm_shape(shpf_gwr.map2) + tm_fill("accidente.1", n = 5, style = "quantile", title = "Coefficientes accidentes") + tm_borders() +
-  tm_layout(frame = TRUE, legend.text.size = 0.9, legend.title.size = 0.8) ; map2
-
-
-#distribucion espacial de agresion_c
-#map3 <- tm_shape(shpf_gwr.map2) + tm_fill("agresion_c", n = 7, style = "quantile") + tm_borders() +
- # tm_layout(title="Distribucion de agresion_C", frame = TRUE,legend.text.size = 0.9,  legend.title.size = 0.9) ; map3
-map3 <- qtm(shpf_gwr.map2, fill = "agresion_c",fill.title = "agresion_c # ",fill.style="fixed",fill.breaks=c(0,0,5,10,15,20,50),style = "classic",
-    fill.palette="YlOrRd",title="Distribucion espacial de agresion_C",title.position = c("center", "top"))  ; map3
-
-#coeficientes asociados al predictor agresion_c
-map3 <- tm_shape(shpf_gwr.map2) + tm_fill("agresion_c.1", n = 7, style = "quantile") + tm_borders() +
- tm_layout(title="Coeficientes de agresion_C", frame = TRUE,legend.text.size = 0.9,  legend.title.size = 0.9) ; map3
-
-
-mapa<-as(gwr.map1, "Spatial") 
-
-st_write(shpf , "shapefile_out.shp", driver="ESRI Shapefile")
