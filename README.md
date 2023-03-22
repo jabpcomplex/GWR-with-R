@@ -161,4 +161,6 @@ Por lo tanto las conclusiones que pudramos obtener de los coeficientes de predic
 [6] Bivand, R. (2017). Geographically weighted regression. CRAN Task View: Analysis of Spatial Data.
 
 ### En mi perfil de GitHub tienes más información; pulsa el siguiente icono
-[![Web|100](./ms-icon-150x150.png)](https://github.com/mouredev)
+[![Web|100](./ms-icon-150x150.png)](https://github.com/jabpcomplex)
+
+[![Web|100](<center><img src="/ms-icon-150x150.png"/></center><center>)](https://github.com/jabpcomplex)
