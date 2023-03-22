@@ -146,7 +146,7 @@ Por lo tanto las conclusiones que pudramos obtener de los coeficientes de predic
  
  
 ------------------------------------------------------------------------------------------------------------
-Referencias
+# Referencias
 
 [1] Brunsdon, C., Fotheringham, A. S., & Charlton, M. E. (1996). Geographically weighted regression: a method for exploring spatial nonstationarity. Geographical analysis, 28(4), 281-298.
 
