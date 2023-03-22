@@ -164,4 +164,4 @@ Por lo tanto las conclusiones que pudramos obtener de los coeficientes de predic
 
 [![Web](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)](https://github.com/jabpcomplex)
 
-
+<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="300px">
